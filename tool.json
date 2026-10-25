@@ -1,0 +1,71 @@
+{
+  "id": "E146",
+  "slug": "eng-cascade-noise-figure",
+  "title": "다단 증폭기 잡음지수 계산기",
+  "title_en": "Cascaded Noise Figure Calculator",
+  "category": "전자·잡음",
+  "category_en": "Electronics and noise",
+  "fields": [],
+  "result_label": "다단 회로의 전체 잡음지수 NF",
+  "result_label_en": "Overall cascaded noise figure NF",
+  "result_dimension": "decibel",
+  "formula": "F_total = F₁ + Σᵢ₌₂ⁿ (Fᵢ−1)/(G₁…Gᵢ₋₁); NF = 10 log₁₀F_total",
+  "purpose": "입력에서 출력으로 연결된 여러 단의 전력 이득과 잡음지수를 Friis 식으로 결합.",
+  "purpose_en": "Combine the power gain and noise figure of an ordered list of stages using the Friis cascade relation.",
+  "assumptions": "행을 입력단에서 출력단 순으로 추가하세요. 각 행의 전력 이득과 잡음지수는 모두 dB입니다. 이득 0 dB는 선형 이득 1이며, 음수는 감쇠입니다. 동일 주파수와 동일한 290 K 잡음 기준, 정합된 단 사이 연결과 비상관 부가잡음을 가정합니다. 잡음지수는 0 dB 이상입니다. 임피던스 부정합·역방향 결합·발진·압축과 주파수 변환기의 측파대 관례 차이는 제외합니다.",
+  "assumptions_en": "Add stages in order from input to output. Both power gain and noise figure are entered in dB; 0 dB gain means unity and negative gain means attenuation. Required: a common frequency and 290 K noise reference, matched interstage connections and uncorrelated added noise. Noise figures are nonnegative. Excluded: impedance mismatch, reverse coupling, oscillation, compression and differing mixer sideband conventions.",
+  "sources": [
+    {
+      "label": "Keysight — RF Amplifier Design, Friis cascade equation",
+      "url": "https://www.keysight.com/content/dam/keysight/en/doc/gate/white-papers/5990-3356.pdf"
+    }
+  ],
+  "condition": "단 순서·전력 이득·정합·290 K 잡음 기준을 확인했습니다.",
+  "condition_en": "I have checked stage order, power gains, matching and the 290 K noise reference.",
+  "groups": [
+    {
+      "key": "stages",
+      "label": "입력에서 출력 순서의 회로 단",
+      "label_en": "Circuit stages in input-to-output order",
+      "fields": [
+        {
+          "key": "gain",
+          "label": "단의 전력 이득 G",
+          "label_en": "Stage power gain G",
+          "dimension": "decibel",
+          "example": 20,
+          "constraint": "signed",
+          "display_unit": "db"
+        },
+        {
+          "key": "nf",
+          "label": "단의 잡음지수 NF",
+          "label_en": "Stage noise figure NF",
+          "dimension": "decibel",
+          "example": 3,
+          "constraint": "nonnegative",
+          "display_unit": "db"
+        }
+      ],
+      "examples": [
+        {
+          "gain": 20,
+          "nf": 3
+        },
+        {
+          "gain": 10,
+          "nf": 6
+        },
+        {
+          "gain": 0,
+          "nf": 10
+        }
+      ],
+      "minRows": 1,
+      "maxRows": 100
+    }
+  ],
+  "site": "https://nanalab.kr/eng-cascade-noise-figure/",
+  "repository": "https://github.com/NaNaCompany/eng-cascade-noise-figure",
+  "output_unit": "db"
+}

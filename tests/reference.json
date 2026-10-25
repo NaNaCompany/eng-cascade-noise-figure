@@ -1,0 +1,111 @@
+{
+  "id": "E146",
+  "value": 3.0836654191795594,
+  "method": "Independent Python Decimal evaluation at 90 decimal digits; mathematical constants supplied to at least 85 digits. Expected numbers rounded once to IEEE-754 binary64. No JS imports.",
+  "cases": [
+    {
+      "name": "single stage noise figure unchanged",
+      "values": {
+        "stages": [
+          {
+            "gain": -10,
+            "nf": 10
+          }
+        ]
+      },
+      "expected": 10.0
+    },
+    {
+      "name": "all ideal noise-free stages",
+      "values": {
+        "stages": [
+          {
+            "gain": 20,
+            "nf": 0
+          },
+          {
+            "gain": -10,
+            "nf": 0
+          },
+          {
+            "gain": 30,
+            "nf": 0
+          }
+        ]
+      },
+      "expected": 0.0
+    },
+    {
+      "name": "unity gain identical noise factors",
+      "values": {
+        "stages": [
+          {
+            "gain": 0,
+            "nf": 10
+          },
+          {
+            "gain": 0,
+            "nf": 10
+          }
+        ]
+      },
+      "expected": 12.78753600952829
+    },
+    {
+      "name": "attenuator then ideal stage",
+      "values": {
+        "stages": [
+          {
+            "gain": -20,
+            "nf": 20
+          },
+          {
+            "gain": 0,
+            "nf": 0
+          }
+        ]
+      },
+      "expected": 20.0
+    },
+    {
+      "name": "large factors retain finite noise figure",
+      "values": {
+        "stages": [
+          {
+            "gain": 4000,
+            "nf": 4000
+          },
+          {
+            "gain": 0,
+            "nf": 3
+          }
+        ]
+      },
+      "expected": 4000.0
+    },
+    {
+      "name": "tiny nonzero noise figure retained",
+      "values": {
+        "stages": [
+          {
+            "gain": 0,
+            "nf": 1e-250
+          }
+        ]
+      },
+      "expected": 1e-250
+    },
+    {
+      "name": "negative classical noise figure rejected",
+      "values": {
+        "stages": [
+          {
+            "gain": 10,
+            "nf": -1
+          }
+        ]
+      },
+      "throws": true
+    }
+  ]
+}
